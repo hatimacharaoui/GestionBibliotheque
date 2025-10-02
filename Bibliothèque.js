@@ -10,7 +10,7 @@ function MenuPrincipal() {
     console.log("3. Opérations sur les livres ");
     console.log("4. Gestion des abonnés ");
     console.log("5. Gestion des emprunts ");
-    console.log("6. Quitter l’application ");
+    console.log("6. Quitter l'application ");
     choix = +prompt("Choisissez une option: ");
   } while (choix < 1 || choix > 6);
   return choix;
@@ -285,11 +285,30 @@ function EnregistrerRetour() {
     console.log("Le livre " + isbn + " a été retourné.");
   } else {
     console.log("Ce livre n'était pas emprunté.");
-    
-  } 
+  }
 }
 
-function AfficherLivresEmpruntésParAbonné() {}
+function AfficherLivresEmpruntésParAbonné() {
+  let id = prompt("Entrer l'ID de l'abonné: ");
+  let empruntAbonnée = Emprunt.filter((e) => e.id == id);
+  if (empruntAbonnée.length === 0) {
+    console.log("l'abonné n'a aucun livre");
+  } else if (empruntAbonnée.length <= 1) {
+    for (let key of empruntAbonnée) {
+      let livreAbonné = livres.find((a) => a.isbn == key.isbn);
+      console.log(
+        "ISBN: " +
+          livreAbonné.isbn +
+          " ,Titre: " +
+          livreAbonné.titre +
+          " ,Auteur: " +
+          livreAbonné.auteur +
+          " ,Année: " +
+          livreAbonné.annee
+      );
+    }
+  }
+}
 
 function main() {
   let choix;
@@ -331,6 +350,7 @@ function main() {
         } else if (choixEmprunt == 2) {
           EnregistrerRetour();
         } else if (choixEmprunt == 3) {
+          AfficherLivresEmpruntésParAbonné();
         }
         break;
       case 6:
@@ -340,4 +360,4 @@ function main() {
   } while (choix !== 6);
 }
 
-main() 
+main();
