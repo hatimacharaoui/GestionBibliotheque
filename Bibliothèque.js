@@ -289,6 +289,8 @@ function EnregistrerRetour() {
   } 
 }
 
+function AfficherLivresEmpruntésParAbonné() {}
+
 function main() {
   let choix;
   do {
